@@ -1,0 +1,20 @@
+driver:
+  server: http://<%= env.SELENIUM_HOST || 'localhost' %>:4444/wd/hub
+  windowSize:
+    width: 1280
+    height: 900
+  desiredCapabilities:
+    browserName: <%= env.BROWSERS || env.BROWSER || 'chrome' %>
+browserPoolSize: <%= env.BROWSER_POOL_SIZE || '1' %>
+implicitWait: 15000
+baseUrl: http://todomvc.com/examples/react/
+initialPath: ?local-config-override=automatedbrowser
+
+# if there's no selenium already running, spawn one as child process
+spawnSelenium: <%= env.SPAWNSELENIUM || 'auto' %>
+
+screenshots:
+  path: screenshots
+
+repl:
+  onFailure: <%= env.REPLONFAIL || 'false' %>

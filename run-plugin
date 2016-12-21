@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+'use strict';
+require('babel-register');
+require('./safe-babel-polyfill');
+const program = require('commander');
+const packageInfo = require('./package');
+const chalk = require('chalk');
+
+program.version(packageInfo.version);
+const config = require('./plugins/configuration').default.load();
+const pluginManager = require('./plugins/plugin-manager').default;
+pluginManager.cli(program, config);
+program
+  .command('*')
+  .action(function() {
+    console.error(chalk.red('\n*** command not found ***'));
+    program.outputHelp();
+  });
+program.parse(process.argv);
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+}

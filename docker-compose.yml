@@ -1,0 +1,20 @@
+version: '2'
+services:
+  main:
+    build: .
+    image: todomvc-spec
+    environment:
+      NODE_ENV: development
+      SELENIUM_HOST: selenium
+    links:
+      - "selenium:selenium"
+    volumes:
+     - ./features:/usr/src/app/features:rw
+     - ./bin:/usr/src/app/src/bin:rw
+     - ./config:/usr/src/app/config:rw
+     - ./output:/usr/src/app/output:rw
+     - ./plugins:/usr/src/app/plugins:rw
+     - ./page-objects:/usr/src/app/page-objects:rw
+     - ./leadfoot:/usr/src/app/leadfoot:rw
+  selenium:
+    image: selenium/standalone-chrome

@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+'use strict';
+require('babel-register');
+require('./safe-babel-polyfill');
+const chalk = require('chalk');
+
+let parallel = false;
+let parallelFlagIndex = process.argv.indexOf('--parallel');
+if (parallelFlagIndex >= 0) {
+  parallel = true;
+  process.env.PARALLEL = true;
+  process.env.SILENT = true;
+  let parallelParam = process.argv.splice(parallelFlagIndex, 2)[1].split('/');
+  process.env.PARALLEL_NODE_INDEX = parseInt(parallelParam[0]);
+  process.env.PARALLEL_NODE_TOTAL = parseInt(parallelParam[1]);
+}
+
+let formatter = 'pretty';
+let args = '-r features --tags ~@wip';
+args = '';
+
+if (parallel) {
+  args += ' --tags ~@parallel-unsafe';
+}
+if (process.env.NODE_ENV === 'production') {
+  // for production, default to smoke test production website
+  args += ' --tags @smoke';
+  if (!/env\//.test(process.env.CONFIG)) {
+    process.env.CONFIG = (process.env.CONFIG || '') + ',env/production';
+  }
+}
+
+args = args.split(' ');
+
+if (parallel && process.env.PARALLEL_NODE_TOTAL > 1) {
+  let parallelPlugin = require('./plugins/parallel-plugin');
+  let uris = parallelPlugin.getUris(process.argv.slice(2).concat(args)) || [];
+  args.push.apply(args, uris);
+}
+
+args.push('--format', formatter);
+
+args.push('--format', 'json:output/result.json');
+if (process.env.PARALLEL_NODE_TOTAL) {
+  args.push('--format', 'json:output/result-parallel-' +
+    process.env.PARALLEL_NODE_INDEX + '-' +
+    process.env.PARALLEL_NODE_TOTAL + '.json');
+}
+args.unshift(2, 0);
+
+process.argv.splice.apply(process.argv, args);
+console.log(chalk.cyan('> cucumber ' + process.argv.join(' ')));
+
+require('./node_modules/cucumber/bin/cucumber');

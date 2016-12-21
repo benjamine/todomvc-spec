@@ -1,0 +1,12 @@
+users:
+  default:
+    firstName: John
+    lastName: Smith
+    email: john.smith@gmail.com
+    password: qweqwe
+    address1: '130th Hollow St. #120'
+    address2: c/o CompanyName, Inc.
+    city: Brooklyn
+    state: New York
+    zip: 12201
+    phoneNumber: 14004103316

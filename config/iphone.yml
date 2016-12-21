@@ -1,0 +1,26 @@
+driver:
+  server: http://localhost:4723/wd/hub
+  windowSize: false
+  fixSessionCapabilities: false
+  desiredCapabilities:
+    nativeWebTap: false
+    platformName: iOS
+    # platformVersion: '9.2' # optional
+    browserName: Safari
+    deviceName: iPhone 6
+    launchTimeout:
+      global: 60000
+      afterSimLaunch: 10000
+
+spawnSelenium: false
+spawnAppium: auto
+
+# starting up iOS Simulator is time costly, reuse it across all scenarios
+reuseBrowser: true
+
+localProxies:
+  # iOS safari execute_async never returns on https sites (see https://github.com/appium/appium/issues/3471 )
+  baseUrl: true
+
+hubotCi:
+  branch: iphone-local

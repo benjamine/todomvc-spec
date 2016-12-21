@@ -1,0 +1,7 @@
+gmail:
+  password: qweqweasdasd
+  oauth:
+    help: 'to get client id & secret visit: https://console.developers.google.com'
+    help2: 'to generate tokens: ./run-plugin email-config'
+    clientId:
+    clientSecret:

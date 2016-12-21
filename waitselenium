@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Loop until selenium server is available
+timeout=30
+printf 'Waiting Selenium Server to load\n'
+until $(curl --output /dev/null --silent --head --fail http://${SELENIUM_HOST:-localhost}:4444/wd/hub); do
+    printf '.'
+    sleep 1
+    let timeout-=1
+    if [ $timeout -le 0 ]; then
+      printf 'Timeout!\n'
+      echo "http://${SELENIUM_HOST:-localhost}:4444/wd/hub never responded"
+      exit 1
+    fi
+done
+printf '\n'

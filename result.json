@@ -1,0 +1,48 @@
+[
+  {
+    "description": "As a busy person\nI want to add TODOs to a list\nIn order to stop worrying about them",
+    "keyword": "Feature",
+    "line": 2,
+    "name": "Add TODOs",
+    "tags": [],
+    "uri": "/Users/benja/proj/todomvc-spec/features/add-todos.feature",
+    "elements": [
+      {
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Add an item",
+        "tags": [],
+        "id": "add-todos;add-an-item",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "I add TODO \"remove dead code\"",
+            "result": {
+              "status": "passed",
+              "duration": 139
+            },
+            "line": 9,
+            "match": {
+              "location": "/Users/benja/proj/todomvc-spec/features/step_definitions/todo-list.js:5"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "the new TODO is on the list",
+            "result": {
+              "status": "passed",
+              "duration": 122
+            },
+            "line": 10,
+            "match": {
+              "location": "/Users/benja/proj/todomvc-spec/features/step_definitions/todo-list.js:10"
+            }
+          }
+        ]
+      }
+    ],
+    "id": "add-todos"
+  }
+]

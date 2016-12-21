@@ -1,0 +1,6 @@
+driver:
+  desiredCapabilities:
+    browserName: safari
+    safari.options:
+      cleanSession: true
+      ensureCleanSession: true

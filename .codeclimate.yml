@@ -1,0 +1,21 @@
+engines:
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
+ratings:
+  paths:
+  - features/**/*.js
+  - page-objects/**/*.js
+  - plugins/**/*.js
+  - leadfoot/**/*.js
+exclude_paths:
+- public/build/**/*
+- public/external/**/*

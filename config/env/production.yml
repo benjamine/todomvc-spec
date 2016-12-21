@@ -1,0 +1,5 @@
+baseUrl: http://todomvc.com/examples/react/
+api:
+  baseUrl: https://api.todomvc.com
+  headers:
+    Authorization: <%= env.API_TOKEN_PRODUCTION || 'none' %>

@@ -18,6 +18,7 @@ class BrowserPlugin {
     require('../leadfoot/patch')(world.config);
 
     let pool = this.getPool(world);
+    pool.log = this.log.bind(this);
 
     world.releaseBrowser = function() {
       if (!world.browser) {
